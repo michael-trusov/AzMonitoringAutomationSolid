@@ -7,7 +7,6 @@ on:
         description: 'env name. accepted values [nonprod, qa]'     
         required: true
         default: 'qa'
-
   push:
     branches: [ main ]
   pull_request:
@@ -15,14 +14,13 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: [self-hosted]
     environment:
       name: ${{ github.event.inputs.env_source }}
 
     steps:
     - name: execute script set-variables script
-      run: |
-        ./script/set-variables.sh ".github/workflows/environments/${{ github.event.inputs.env_source }}.json"
+      run: ./script/set-variables.sh ".github/workflows/environments/${{ github.event.inputs.env_source }}.json"
     - uses: actions/checkout@v2
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
