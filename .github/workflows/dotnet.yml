@@ -28,11 +28,11 @@ jobs:
       shell: bash
       run: |
         dotnet build --configuration Release --output ./output
-        dotnet publish -c Release -o './output' 
+        dotnet publish -c Release -o './myapp' 
         
     - name: 'Publish'
       uses: azure/webapps-deploy@v2
       with:
         app-name: ctc-nonprod-sfa-app
-        package: './output'
+        package: './myapp'
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
