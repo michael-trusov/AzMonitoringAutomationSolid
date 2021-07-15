@@ -9,7 +9,7 @@ on:
         default: 'qa'
 jobs:
   build:
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     environment:
       name: ${{ github.event.inputs.env_source }}
 
