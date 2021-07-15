@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       env_source:
-        description: 'env name. accepted values [nonprod, qa]'     
+        description: 'env name. accepted values [qa]'     
         required: true
         default: 'qa'
 jobs:
