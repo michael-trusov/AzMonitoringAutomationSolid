@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AZMA.TestClient</name>
+    </assembly>
+    <members>
+        <member name="M:AZMA.TestClient.Emulators.MetricAlerts.EmulationService.Emulate(AZMA.Application.Models.Percentage,System.Int32,System.Net.HttpStatusCode)">
+            <summary>
+            Calculate number of REST calls which should have specified response delay and response status code and number of 'normal' REST calls without any delay; do the calls to the
+            Test API specified in settings.        
+            </summary>
+            <param name="percentageOfCustomizedCalls">Percentage of REST calls which should have specified response delay and response status code.</param>
+            <param name="responseDelayInMilliseconds">Response delay.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AZMA.TestClient.Emulators.MetricAlerts.EmulationService.Emulate(System.Int32,System.Int32,System.Int32,System.Net.HttpStatusCode)">
+            <summary>
+            Do the specified number of 'customized' and 'normal' calls to the Test API specified in settings.
+            </summary>
+            <param name="numberOfCustomizedCalls"></param>
+            <param name="numberOfNormalCalls"></param>
+            <param name="responseDelayInMilliseconds"></param>
+            <param name="expectedResponseStatusCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AZMA.TestClient.Emulators.MetricAlerts.Muc1EmulationService.CombineAllScenariosInOne">
+            <summary>
+            Use case includes 4 scenarious:
+            1. At least 50% of requests are processed with duration higher than 500 ms and it is observable during 5 min of time
+            2. At least 50% of requests are processed with duration higher than 2000 ms in 5 min of time
+            3. 95% of requests are processed with duration higher than 400 ms in 5 min of time  
+            4. 95% or requests is processed with duration higher than 1000ms - for 1 min of time
+            
+            So to cover all scenarious and get 4 alert notifications we need to have 95% of requests with the duration higher than 2000ms
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AZMA.TestClient.Emulators.MetricAlerts.Muc1EmulationService.EmulateScenarioA1">
+            <summary>
+            Condition: 
+            At least 50% of requests are processed with duration higher than 500 ms and it is observable during 5 min of time
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AZMA.TestClient.Emulators.MetricAlerts.Muc1EmulationService.EmulateScenarioA2">
+            <summary>
+            At least 50% of requests are processed with duration higher than 2000 ms in 5 min of time
+            </summary>
+            <returns></returns>        
+        </member>
+        <member name="M:AZMA.TestClient.Emulators.MetricAlerts.Muc1EmulationService.EmulateScenarioA3">
+            <summary>
+            95% of requests are processed with duration higher than 400 ms in 5 min of time  
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AZMA.TestClient.Emulators.MetricAlerts.Muc1EmulationService.EmulateScenarioA4">
+            <summary>
+            95% or requests is processed with duration higher than 1000ms - for 1 min of time
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AZMA.TestClient.Emulators.MetricAlerts.Muc3EmulationService.CombineAllScenariosInOne">
+            <summary>
+            Use case includes 2 scenarious:
+            1. At least 50% of requests receives response with 502 response code for 5 minutes
+            2. At least 75% of requests receives response with 502 response code for 1 minute
+            
+            So to cover all scenarious and get 2 alert notifications we need to have 75% of requests 502 response code for 1 minute
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AZMA.TestClient.Emulators.MetricAlerts.Muc3EmulationService.EmulateScenarioA1">
+            <summary>
+            Condition:
+            At least 50% of requests receives response with 502 response code for 5 minutes
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AZMA.TestClient.Emulators.MetricAlerts.Muc3EmulationService.EmulateScenarioA2">
+            <summary>
+            Condition:
+            At least 75% of requests receives response with 502 response code for 1 minute
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AZMA.TestClient.Emulators.MetricAlerts.Muc4EmulationService.EmulateScenarioA1">
+            <summary>
+            At least 50% of requests receives response with 500 or 400 response code for 15 minutes
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AZMA.TestClient.Emulators.MetricAlerts.Muc4EmulationService.EmulateScenarioA2">
+            <summary>
+            At least 75% of requests receives response with 500 or 400 response code for 15 minutes
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AZMA.TestClient.Emulators.MetricAlerts.Muc5EmulationService.EmulateScenarioA1">
+            <summary>
+            At least 50% of requests receives 403 response code for 15 minutes
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AZMA.TestClient.Emulators.MetricAlerts.Muc5EmulationService.EmulateScenarioA2">
+            <summary>
+            At least 75% of requests receives 403 response code for 15 minutes
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AZMA.TestClient.Emulators.MetricAlerts.Muc6EmulationService.EmulateScenarioA1">
+            <summary>
+            At least 50% of requests receives 401 response code for 15 minutes
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AZMA.TestClient.Emulators.MetricAlerts.Muc6EmulationService.EmulateScenarioA2">
+            <summary>
+            At least 75% of requests receives 401 response code for 15 minutes
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AZMA.TestClient.Emulators.MetricAlerts.Muc7EmulationService.EmulateScenarioA1">
+            <summary>
+            Condition: 
+            At least 50% of requests receives 404 response code for 15 minutes
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AZMA.TestClient.Emulators.MetricAlerts.Muc7EmulationService.EmulateScenarioA2">
+            <summary>
+            At least 75% of requests receives 404 response code for 15 minutes
+            </summary>
+            <returns></returns>        
+        </member>
+    </members>
+</doc>
