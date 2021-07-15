@@ -27,7 +27,6 @@ jobs:
     - name: 'Restore and Build'
       shell: bash
       run: |
-        dotnet build --configuration Release --output ./output
         dotnet publish -c Release -o './myapp' 
         
     - name: 'Publish'
