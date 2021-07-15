@@ -1,0 +1,6 @@
+{
+    "resource_group":"ctc-personal-apim-we-rg",
+    "function_name":"ctc-nonprod-sfa-app",
+    "azure_web_app_package_path":".",
+    "dotnet_version":"3.1"
+}
