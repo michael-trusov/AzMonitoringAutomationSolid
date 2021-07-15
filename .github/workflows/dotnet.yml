@@ -1,18 +1,18 @@
-name: .NET
+name: Deploy Test Client Webb App code
 
 on:
   workflow_dispatch:
     inputs:
       env_source:
-        description: 'env name. accepted values [qa]'     
+        description: 'env name. accepted values [nonprod, qa]'     
         required: true
         default: 'qa'
+
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted]
     environment:
-      name: qa
-
+      name: ${{ github.event.inputs.env_source }}
     steps:
     - name: 'Checkout GitHub Action'
       uses: actions/checkout@v2
@@ -21,7 +21,7 @@ jobs:
         chmod +x ./script/set-variables.sh
     - name: execute script set-variables script
       run: |
-        ./script/set-variables.sh ".github/workflows/environments/qa.json"
+        ./script/set-variables.sh ".github/workflows/environments/${{ github.event.inputs.env_source }}.json"
     - name: Setup DotNet ${{ env.dotnet_version }} Environment
       uses: actions/setup-dotnet@v1
       with:
@@ -30,3 +30,10 @@ jobs:
     - name: 'Resolve Project Dependencies Using Dotnet'
       shell: bash
       run: dotnet build --configuration Release --output ./output
+          
+    - name: 'Run Azure webapp deploy action using publish profile credentials'
+      uses: azure/webapps-deploy@v2
+      with: 
+        app-name: '${{env.function_name}}'
+        package: '${{ env.azure_web_app_package_path }}/output' 
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
