@@ -11,7 +11,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     environment:
-      name: ${{ github.event.inputs.env_source }}
+      name: qa
 
     steps:
     - name: 'Checkout GitHub Action'
