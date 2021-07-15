@@ -14,19 +14,15 @@ jobs:
     
     environment:
       name: ${{ github.event.inputs.env_source }}
+      
     steps:
     - name: 'Checkout GitHub Action'
-      uses: actions/checkout@v2
-    - name: change permissions for scripts
-      run: |
-        chmod +x ./script/set-variables.sh
-    - name: execute script set-variables script
-      run: |
-        ./script/set-variables.sh ".github/workflows/environments/${{ github.event.inputs.env_source }}.json"
-    - name: Setup DotNet ${{ env.dotnet_version }} Environment
+      uses: actions/checkout@main
+          
+    - name: Setup DotNet 3.1.x Environment
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: ${{ env.dotnet_version }}
+        dotnet-version: '3.1.x'
 
     - name: 'Restore and Build'
       shell: bash
@@ -37,6 +33,6 @@ jobs:
     - name: 'Publish'
       uses: azure/webapps-deploy@v2
       with:
-        app-name: ${{env.function_name}}
-        package: ./output
+        app-name: ctc-nonprod-sfa-app
+        package: './output'
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
