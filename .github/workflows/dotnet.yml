@@ -21,7 +21,7 @@ jobs:
         chmod +x ./script/set-variables.sh
     - name: execute script set-variables script
       run: |
-        ./script/set-variables.sh ".github/workflows/environments/${{ github.event.inputs.env_source }}.json"
+        ./script/set-variables.sh ".github/workflows/environments/qa.json"
     - name: Setup DotNet ${{ env.dotnet_version }} Environment
       uses: actions/setup-dotnet@v1
       with:
