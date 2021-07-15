@@ -27,8 +27,8 @@ jobs:
     - name: 'Restore and Build'
       shell: bash
       run: |
-        dotnet build -c Release
-        dotnet publish -c Release
+        dotnet build --configuration Release
+        dotnet publish -c Release -o './myapp'
         
     - name: 'Publish'
       uses: azure/webapps-deploy@v2
