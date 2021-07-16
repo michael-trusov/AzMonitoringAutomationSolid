@@ -7,10 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AZMA.TestClient", "AZMA.Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AZMA.Application", "AZMA.Application\AZMA.Application.csproj", "{E1A1787B-693F-48AD-9AB3-665EFC2B3380}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4F1D493F-2A8C-401C-BBDB-BEAB2D177F1D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AZMA.Application.UnitTests", "Tests\AZMA.Application.UnitTests\AZMA.Application.UnitTests.csproj", "{358683EE-39D7-477D-A679-FEBCE3337CD0}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AZMA.Core", "AZMA.Core\AZMA.Core.csproj", "{E6BCD7CA-2723-4925-AE13-2584E8CB93BC}"
 EndProject
 Global
@@ -27,10 +23,6 @@ Global
 		{E1A1787B-693F-48AD-9AB3-665EFC2B3380}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1A1787B-693F-48AD-9AB3-665EFC2B3380}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1A1787B-693F-48AD-9AB3-665EFC2B3380}.Release|Any CPU.Build.0 = Release|Any CPU
-		{358683EE-39D7-477D-A679-FEBCE3337CD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{358683EE-39D7-477D-A679-FEBCE3337CD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{358683EE-39D7-477D-A679-FEBCE3337CD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{358683EE-39D7-477D-A679-FEBCE3337CD0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E6BCD7CA-2723-4925-AE13-2584E8CB93BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E6BCD7CA-2723-4925-AE13-2584E8CB93BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6BCD7CA-2723-4925-AE13-2584E8CB93BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -38,9 +30,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{358683EE-39D7-477D-A679-FEBCE3337CD0} = {4F1D493F-2A8C-401C-BBDB-BEAB2D177F1D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8625ED16-3F77-4DA2-B30B-84151D8F982C}
