@@ -10,8 +10,8 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: ctc-nonprod-sfa-app  # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
-  DOTNET_VERSION: '3.1.x'           # set this to the dot net version to use
+  AZURE_WEBAPP_PACKAGE_PATH: '.'          # set this to the path to your web app project, defaults to the repository root
+  DOTNET_VERSION: '3.1.x'                 # set this to the dot net version to use
 
 jobs:
   build:
@@ -24,19 +24,18 @@ jobs:
     - name: 'Checkout GitHub Action'
       uses: actions/checkout@main      
              
-    - name: Setup DotNet 3.1.x Environment
+    - name: Setup .Net Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
-    - name: 'Restore and Build'
-      shell: bash
+    - name: 'Run build and publish'
       run: |
         dotnet restore
         dotnet build --configuration Release
         dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
         
-    - name: 'Publish'
+    - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
