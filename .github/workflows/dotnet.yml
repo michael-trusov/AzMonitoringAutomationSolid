@@ -1,4 +1,4 @@
-name: .NET
+name: Deploy Test Client Webb App code
 
 on:
   workflow_dispatch:
@@ -7,26 +7,38 @@ on:
         description: 'env name. accepted values [nonprod, qa]'     
         required: true
         default: 'qa'
+
+env:
+  AZURE_WEBAPP_NAME: ctc-nonprod-sfa-app  # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: '.'          # set this to the path to your web app project, defaults to the repository root
+  DOTNET_VERSION: '3.1.x'                 # set this to the dot net version to use
+
 jobs:
   build:
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
+    
     environment:
       name: ${{ github.event.inputs.env_source }}
-
+      
     steps:
     - name: 'Checkout GitHub Action'
-      uses: actions/checkout@v2
-    - name: change permissions for scripts
-      run: |
-        chmod +x ./script/set-variables.sh
-    - name: execute script set-variables script
-      run: |
-        ./script/set-variables.sh ".github/workflows/environments/${{ github.event.inputs.env_source }}.json"
-    - name: Setup DotNet ${{ env.dotnet_version }} Environment
+      uses: actions/checkout@main      
+             
+    - name: Setup .Net Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: ${{ env.dotnet_version }}
+        dotnet-version: ${{ env.DOTNET_VERSION }}
 
-    - name: 'Resolve Project Dependencies Using Dotnet'
-      shell: bash
-      run: dotnet build --configuration Release --output ./output
+    - name: 'Build project'
+      run: dotnet build --configuration Release
+      
+    - name: 'Publish'  
+      run: |
+        dotnet publish -c Release -o testclientwebapp
+        
+    - name: 'Deploy to Azure Web App'
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: './testclientwebapp'
