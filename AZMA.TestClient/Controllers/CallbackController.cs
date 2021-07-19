@@ -35,8 +35,13 @@ namespace AZMA.TestClient.Controllers
             using (StreamReader stream = new StreamReader(HttpContext.Request.Body))
             {
                 string alertStandardSchemaAsJson = await stream.ReadToEndAsync();
-                
-                _testSession.Passed(new AlertStandardSchemaParser().Parse(alertStandardSchemaAsJson));               
+
+                if (string.IsNullOrWhiteSpace(alertStandardSchemaAsJson))
+                {
+                    return BadRequest();
+                }
+
+                _testSession.Passed(new AlertStandardSchemaParser().Parse(alertStandardSchemaAsJson));
             }
 
             return Ok();
