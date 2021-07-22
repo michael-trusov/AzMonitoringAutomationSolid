@@ -26,7 +26,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         /// <returns></returns>
         public async Task<EmulationCallsResult> CombineAllScenariosInOne()
         {
-            return await Emulate(new Percentage(75), 0, System.Net.HttpStatusCode.BadGateway);
+            return await Emulate(new Percentage(80), 0, System.Net.HttpStatusCode.BadGateway);
         }
 
         /// <summary>

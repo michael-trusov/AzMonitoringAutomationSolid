@@ -19,5 +19,11 @@ namespace AZMA.TestClient.Models
         public int ExpectedAlertRaisedTimeInMinutes { get; set; }
 
         public List<TestApiCallResult> Errors { get; set; }
+
+        public string ToLog(string operation)
+        {
+            return $"Operation: {operation}\n NumberOfNormalCalls: {NumberOfNormalCalls}\n NumberOfCustomizedCalls: {NumberOfCustomizedCalls}\n HasErrors: {Errors.Any()}";
+
+        }
     }
 }

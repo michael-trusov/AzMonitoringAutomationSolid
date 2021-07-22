@@ -26,6 +26,9 @@ namespace TestClient
         
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddApplicationInsightsTelemetry(
+                Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
+
             AppSettings = services.AddConfiguration(Configuration);
 
             services.AddTestClientServices(AppSettings);
