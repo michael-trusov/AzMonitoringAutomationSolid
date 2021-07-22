@@ -1,5 +1,6 @@
 ﻿using AZMA.Application.Interfaces;
 using AZMA.Application.Models;
+using AZMA.TestClient.Emulators.MetricAlerts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,15 +15,20 @@ namespace TestClient.Controllers
     [AllowAnonymous]
     [ApiController]
     public class ControlPanelController : ControllerBase
-    {       
-        public ControlPanelController(ITestSession testSession)
+    {
+        private Muc1EmulationService _muc1EmulationService;
+
+        public ControlPanelController(Muc1EmulationService muc1EmulationService)
         {
+            _muc1EmulationService = muc1EmulationService;
         }
        
         [HttpGet("run-all-tests")]
         public Task RunAllTests()
         {
-            throw new NotImplementedException();
+            Task.Run(() => _muc1EmulationService.CombineAllScenariosInOne());
+
+            return Task.CompletedTask;
         }
     }
 }

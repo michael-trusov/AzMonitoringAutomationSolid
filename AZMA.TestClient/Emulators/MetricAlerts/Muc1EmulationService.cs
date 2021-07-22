@@ -18,7 +18,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         /// 1. At least 50% of requests are processed with duration higher than 500 ms and it is observable during 5 min of time
         /// 2. At least 50% of requests are processed with duration higher than 2000 ms in 5 min of time
         /// 3. 95% of requests are processed with duration higher than 400 ms in 5 min of time  
-        /// 4. 95% or requests is processed with duration higher than 1000ms - for 1 min of time
+        /// 4. 95% or requests is processed with duration higher than 1000ms - for 5 min of time
         /// 
         /// So to cover all scenarious and get 4 alert notifications we need to have 95% of requests with the duration higher than 2000ms
         /// </summary>
@@ -65,7 +65,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         }
 
         /// <summary>
-        /// 95% or requests is processed with duration higher than 1000ms - for 1 min of time
+        /// 95% or requests is processed with duration higher than 1000ms - for 5 min of time
         /// </summary>
         /// <returns></returns>
         public async Task<EmulationCallsResult> EmulateScenarioA4()

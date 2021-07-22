@@ -16,6 +16,8 @@ namespace AZMA.TestClient.Models
 
         public int NumberOfCustomizedCalls { get; set; }
 
+        public int ExpectedAlertRaisedTimeInMinutes { get; set; }
+
         public List<TestApiCallResult> Errors { get; set; }
     }
 }
