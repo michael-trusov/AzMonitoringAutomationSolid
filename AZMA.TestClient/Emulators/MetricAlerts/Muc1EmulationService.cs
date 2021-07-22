@@ -27,7 +27,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTests(TestId.TestId_Muc1A1, TestId.TestId_Muc1A2, TestId.TestId_Muc1A3, TestId.TestId_Muc1A4);
 
-            return await Emulate(15, 1, 2000 + 1, System.Net.HttpStatusCode.OK);
+            return await Emulate(15, 0, 2000 + 1, System.Net.HttpStatusCode.OK);
         }
 
         /// <summary>
