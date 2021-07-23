@@ -1,4 +1,5 @@
 ﻿using AZMA.TestClient.Emulators.MetricAlerts;
+using AZMA.TestClient.Emulators.Models;
 using AZMA.TestClient.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -57,7 +58,7 @@ namespace AZMA.TestClient.Controllers
         }
 
         [HttpGet("alert-muc3A1")]
-        public async Task<EmulationCallsResult>  alertMuc3A1()
+        public async Task<EmulationResult>  alertMuc3A1()
         {
             return await _muc3EmulationService.EmulateScenarioA1();
         }

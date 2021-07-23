@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TestClient.HttpClients;
 using AZMA.TestClient.Models;
 using AZMA.Application.Interfaces;
+using AZMA.TestClient.Emulators.Models;
 
 namespace AZMA.TestClient.Emulators.MetricAlerts
 {
@@ -24,9 +25,11 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         /// So to cover all scenarious and get 2 alert notifications we need to have 75% of requests 502 response code for 1 minute
         /// </summary>
         /// <returns></returns>
-        public async Task<EmulationCallsResult> CombineAllScenariosInOne()
+        public async Task<EmulationResult> CombineAllScenariosInOne()
         {
-            return await Emulate(new Percentage(80), 0, System.Net.HttpStatusCode.BadGateway);
+            _testSession.RunTests(TestId.TestId_Muc3A1, TestId.TestId_Muc3A2);
+
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(6), TimeSpan.FromMilliseconds(100), HttpStatusCode.BadGateway, TimeSpan.FromMilliseconds(0)));
         }
 
         /// <summary>
@@ -34,11 +37,11 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         /// At least 50% of requests receives response with 502 response code for 5 minutes
         /// </summary>
         /// <returns></returns>
-        public async Task<EmulationCallsResult> EmulateScenarioA1()
+        public async Task<EmulationResult> EmulateScenarioA1()
         {
             _testSession.RunTest(TestId.TestId_Muc3A1);
-
-            return await Emulate(new Percentage(50), 0, HttpStatusCode.BadGateway);
+            
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(6), TimeSpan.FromMilliseconds(100), HttpStatusCode.BadGateway, TimeSpan.FromMilliseconds(0)));
         }
 
         /// <summary>
@@ -46,11 +49,11 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         /// At least 75% of requests receives response with 502 response code for 1 minute
         /// </summary>
         /// <returns></returns>
-        public async Task<EmulationCallsResult> EmulateScenarioA2()
+        public async Task<EmulationResult> EmulateScenarioA2()
         {
             _testSession.RunTest(TestId.TestId_Muc3A2);
 
-            return await Emulate(new Percentage(75), 0, HttpStatusCode.BadGateway);
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(4), TimeSpan.FromMilliseconds(100), HttpStatusCode.BadGateway, TimeSpan.FromMilliseconds(0)));
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using AZMA.Application.Infrastructure.Configuration;
 using AZMA.TestClient.Models;
+using System;
 
 namespace TestClient.HttpClients
 {
@@ -19,9 +20,9 @@ namespace TestClient.HttpClients
             _testApiConfiguration = testApiConfiguration;
         }
 
-        public async Task<TestApiCallResult> SendAsync(HttpStatusCode expectedResponseStatusCode, int expectedResponseDelayInMilliseconds)
+        public async Task<TestApiCallResult> SendAsync(HttpStatusCode expectedResponseStatusCode, TimeSpan expectedResponseDelay)
         {
-            var httpResponseMessage = await _client.GetAsync($"{_testApiConfiguration.Url}?responseStatusCode={(int)expectedResponseStatusCode}&delay={expectedResponseDelayInMilliseconds}");
+            var httpResponseMessage = await _client.GetAsync($"{_testApiConfiguration.Url}?responseStatusCode={(int)expectedResponseStatusCode}&delay={expectedResponseDelay.Milliseconds}");
             
             return new TestApiCallResult(httpResponseMessage, expectedResponseStatusCode);
         }

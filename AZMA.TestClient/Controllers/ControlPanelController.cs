@@ -1,6 +1,7 @@
 ﻿using AZMA.Application.Interfaces;
 using AZMA.Application.Models;
 using AZMA.TestClient.Emulators.MetricAlerts;
+using AZMA.TestClient.Emulators.Models;
 using AZMA.TestClient.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -35,24 +36,22 @@ namespace TestClient.Controllers
         }
        
         [HttpGet("run-all-tests")]
-        public Task RunAllTests()
+        public async Task RunAllTests()
         {
-            Task.Run(async () =>
+            await Task.Run(async () =>
                 {
-                    EmulationCallsResult result = await _muc1EmulationService.CombineAllScenariosInOne();
+                    EmulationResult result = await _muc1EmulationService.CombineAllScenariosInOne();
                     
-                    _logger.LogInformation(result.ToLog("_muc1EmulationService.CombineAllScenariosInOne"));
+                    //_logger.LogInformation(result.ToLog("_muc1EmulationService.CombineAllScenariosInOne"));
                 })
                 .ContinueWith(async (t) =>
                 {
-                    Thread.Sleep(10000);
+                    Thread.Sleep(1000);
 
-                    EmulationCallsResult result = await _muc3EmulationService.CombineAllScenariosInOne();
+                    EmulationResult result = await _muc3EmulationService.CombineAllScenariosInOne();
 
-                    _logger.LogInformation(result.ToLog("_muc3EmulationService.CombineAllScenariosInOne"));
+                    //_logger.LogInformation(result.ToLog("_muc3EmulationService.CombineAllScenariosInOne"));
                 });
-
-            return Task.CompletedTask;
         }
     }
 }

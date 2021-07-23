@@ -1,9 +1,12 @@
 ﻿using AZMA.Application.Infrastructure.Configuration;
 using AZMA.Application.Interfaces;
 using AZMA.Application.Models;
+using AZMA.TestClient.Emulators.Models;
 using AZMA.TestClient.Infrastructure.Configuration;
 using AZMA.TestClient.Models;
+using System;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using TestClient.HttpClients;
 
@@ -25,6 +28,25 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
 
         protected IEmulatorConfiguration EmulatorConfiguration { get; set; }
 
+        protected async Task<EmulationResult> Emulate(PeriodBasedEmulationModel emulationModel)
+        {
+            var emulationResult = new EmulationResult();
+
+            var startDateTime = DateTime.Now;            
+            while(emulationModel.TotalPeriod > DateTime.Now - startDateTime)
+            {               
+                var testApiCallResult = await _testApiHttpClient.SendAsync(emulationModel.ExpectedResponseStatusCode, emulationModel.ExpectedResponseDelay);                                
+                if (testApiCallResult.HasError)
+                    emulationResult.Errors.Add(testApiCallResult);
+
+                emulationResult.NumberOfSentRequests++;
+
+                Thread.Sleep(emulationModel.DelayBetweenRequests);
+            }
+
+            return emulationResult;
+        }
+
         /// <summary>
         /// Calculate number of REST calls which should have specified response delay and response status code and number of 'normal' REST calls without any delay; do the calls to the
         /// Test API specified in settings.        
@@ -32,12 +54,14 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         /// <param name="percentageOfCustomizedCalls">Percentage of REST calls which should have specified response delay and response status code.</param>
         /// <param name="responseDelayInMilliseconds">Response delay.</param>
         /// <returns></returns>
-        protected async Task<EmulationCallsResult> Emulate(Percentage percentageOfCustomizedCalls, int responseDelayInMilliseconds, HttpStatusCode expectedResponseStatusCode)
+        protected async Task<EmulationResult> Emulate(Percentage percentageOfCustomizedCalls, int responseDelayInMilliseconds, HttpStatusCode expectedResponseStatusCode)
         {
-            int numberOfCustomizedCalls = percentageOfCustomizedCalls.From(EmulatorConfiguration.DefaultNumberOfRestCalls);
-            int numberOfNormalCalls = EmulatorConfiguration.DefaultNumberOfRestCalls - numberOfCustomizedCalls;
+            throw new NotImplementedException();
 
-            return await Emulate(numberOfCustomizedCalls, numberOfNormalCalls, responseDelayInMilliseconds, expectedResponseStatusCode);
+            //int numberOfCustomizedCalls = percentageOfCustomizedCalls.From(EmulatorConfiguration.DefaultNumberOfRestCalls);
+            //int numberOfNormalCalls = EmulatorConfiguration.DefaultNumberOfRestCalls - numberOfCustomizedCalls;
+
+            //return await Emulate(numberOfCustomizedCalls, numberOfNormalCalls, responseDelayInMilliseconds, expectedResponseStatusCode);
         }
 
         /// <summary>
@@ -48,35 +72,32 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         /// <param name="responseDelayInMilliseconds"></param>
         /// <param name="expectedResponseStatusCode"></param>
         /// <returns></returns>
-        protected async Task<EmulationCallsResult> Emulate(int numberOfCustomizedCalls, int numberOfNormalCalls, int responseDelayInMilliseconds, HttpStatusCode expectedResponseStatusCode)
+        protected async Task<EmulationResult> Emulate(int numberOfCustomizedCalls, int numberOfNormalCalls, int responseDelayInMilliseconds, HttpStatusCode expectedResponseStatusCode)
         {
-            EmulationCallsResult emulationCallsResult = new EmulationCallsResult
-            {
-                NumberOfNormalCalls = numberOfNormalCalls,
-                NumberOfCustomizedCalls = numberOfCustomizedCalls
-            };
+            throw new NotImplementedException();
+            //EmulationResult emulationCallsResult = new EmulationResult();
 
-            while (numberOfCustomizedCalls != 0 || numberOfNormalCalls != 0)
-            {
-                if (numberOfNormalCalls <= numberOfCustomizedCalls)
-                {
-                    var testApiCallResult = await _testApiHttpClient.SendAsync(expectedResponseStatusCode, responseDelayInMilliseconds);
-                    if (testApiCallResult.HasError)
-                        emulationCallsResult.Errors.Add(testApiCallResult);
+            //while (numberOfCustomizedCalls != 0 || numberOfNormalCalls != 0)
+            //{
+            //    if (numberOfNormalCalls <= numberOfCustomizedCalls)
+            //    {
+            //        var testApiCallResult = await _testApiHttpClient.SendAsync(expectedResponseStatusCode, responseDelayInMilliseconds);
+            //        if (testApiCallResult.HasError)
+            //            emulationCallsResult.Errors.Add(testApiCallResult);
 
-                    numberOfCustomizedCalls--;
-                }
-                else
-                {
-                    var testApiCallResult = await _testApiHttpClient.SendAsync(System.Net.HttpStatusCode.OK, 0);
-                    if (testApiCallResult.HasError)
-                        emulationCallsResult.Errors.Add(testApiCallResult);
+            //        numberOfCustomizedCalls--;
+            //    }
+            //    else
+            //    {
+            //        var testApiCallResult = await _testApiHttpClient.SendAsync(System.Net.HttpStatusCode.OK, 0);
+            //        if (testApiCallResult.HasError)
+            //            emulationCallsResult.Errors.Add(testApiCallResult);
 
-                    numberOfNormalCalls--;
-                }
-            }
+            //        numberOfNormalCalls--;
+            //    }
+            //}
 
-            return emulationCallsResult;
+            //return emulationCallsResult;
         }
     }
 }
