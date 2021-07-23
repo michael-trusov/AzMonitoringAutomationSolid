@@ -29,7 +29,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTests(TestId.TestId_Muc1A1, TestId.TestId_Muc1A2, TestId.TestId_Muc1A3, TestId.TestId_Muc1A4);
 
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(6), TimeSpan.FromMilliseconds(100), HttpStatusCode.OK, TimeSpan.FromMilliseconds(2050)));
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(6), TimeSpan.FromMilliseconds(100), HttpStatusCode.OK, TimeSpan.FromMilliseconds(2100)));
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTest(TestId.TestId_Muc1A1);
 
-            return await Emulate(new Percentage(50), 500 + 1, System.Net.HttpStatusCode.OK);
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(6), TimeSpan.FromMilliseconds(100), HttpStatusCode.OK, TimeSpan.FromMilliseconds(550)));
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTest(TestId.TestId_Muc1A2);
 
-            return await Emulate(new Percentage(50), 2000 + 1, System.Net.HttpStatusCode.OK);
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(6), TimeSpan.FromMilliseconds(100), HttpStatusCode.OK, TimeSpan.FromMilliseconds(2100)));
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTest(TestId.TestId_Muc1A4);
 
-            return await Emulate(new Percentage(95), 1000 + 1, System.Net.HttpStatusCode.OK);
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(6), TimeSpan.FromMilliseconds(100), HttpStatusCode.OK, TimeSpan.FromMilliseconds(1100)));
         }
     }
 }

@@ -36,22 +36,24 @@ namespace TestClient.Controllers
         }
        
         [HttpGet("run-all-tests")]
-        public async Task RunAllTests()
+        public Task RunAllTests()
         {
-            await Task.Run(async () =>
+            Task.Run(async () =>
                 {
                     EmulationResult result = await _muc1EmulationService.CombineAllScenariosInOne();
                     
-                    //_logger.LogInformation(result.ToLog("_muc1EmulationService.CombineAllScenariosInOne"));
+                    _logger.LogInformation("_muc1EmulationService.CombineAllScenariosInOne");
                 })
                 .ContinueWith(async (t) =>
                 {
-                    Thread.Sleep(1000);
+                    Thread.Sleep(10000);
 
                     EmulationResult result = await _muc3EmulationService.CombineAllScenariosInOne();
 
-                    //_logger.LogInformation(result.ToLog("_muc3EmulationService.CombineAllScenariosInOne"));
+                    _logger.LogInformation("_muc3EmulationService.CombineAllScenariosInOne");
                 });
+
+            return Task.CompletedTask;
         }
     }
 }
