@@ -25,6 +25,9 @@ namespace TestClient.Controllers
 
         private ILogger<ControlPanelController> _logger;
 
+        private object _lockTest = new object();
+        private static int _counter = 0;
+
         public ControlPanelController(Muc1EmulationService muc1EmulationService, 
                                       Muc3EmulationService muc3EmulationService, 
                                       ILogger<ControlPanelController> logger)
@@ -34,26 +37,25 @@ namespace TestClient.Controllers
 
             _logger = logger;
         }
-       
+
         [HttpGet("run-all-tests")]
-        public Task RunAllTests()
+        public IActionResult RunAllTests()
         {
             Task.Run(async () =>
                 {
-                    EmulationResult result = await _muc1EmulationService.CombineAllScenariosInOne();
+                    EmulationResult result = await _muc1EmulationService.CombineAllScenariosInOne();                    
                     
                     _logger.LogInformation("_muc1EmulationService.CombineAllScenariosInOne");
                 })
                 .ContinueWith(async (t) =>
                 {
-                    Thread.Sleep(10000);
+                    Thread.Sleep(60000);
 
                     EmulationResult result = await _muc3EmulationService.CombineAllScenariosInOne();
-
                     _logger.LogInformation("_muc3EmulationService.CombineAllScenariosInOne");
                 });
 
-            return Task.CompletedTask;
+            return new OkResult();
         }
     }
 }
