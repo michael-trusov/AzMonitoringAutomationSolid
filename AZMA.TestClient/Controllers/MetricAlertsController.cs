@@ -64,9 +64,11 @@ namespace AZMA.TestClient.Controllers
         }
 
         [HttpGet("alert-muc3A2")]
-        public async Task alertMuc3A2()
+        public IActionResult alertMuc3A2()
         {
-            await _muc3EmulationService.EmulateScenarioA2();
+            Task.Run(async () =>  await _muc3EmulationService.EmulateScenarioA2());
+
+            return new OkResult();
         }
 
         [HttpGet("alert-muc4A1")]
