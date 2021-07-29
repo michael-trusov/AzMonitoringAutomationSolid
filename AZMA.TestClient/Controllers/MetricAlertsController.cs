@@ -72,15 +72,19 @@ namespace AZMA.TestClient.Controllers
         }
 
         [HttpGet("alert-muc4A1")]
-        public async Task alertMuc4A1()
+        public IActionResult alertMuc4A1()
         {
-            await _muc4EmulationService.EmulateScenarioA1();
+            Task.Run(async () => await _muc4EmulationService.EmulateScenarioA1());
+
+            return new OkResult();
         }
 
         [HttpGet("alert-muc4A2")]
-        public async Task alertMuc4A2()
+        public IActionResult alertMuc4A2()
         {
-            await _muc4EmulationService.EmulateScenarioA1();
+            Task.Run(async () => await _muc4EmulationService.EmulateScenarioA1());
+
+            return new OkResult();
         }
 
         [HttpGet("alert-muc5A1")]

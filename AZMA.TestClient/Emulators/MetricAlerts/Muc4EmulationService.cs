@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TestClient.HttpClients;
 using AZMA.Application.Interfaces;
 using AZMA.Application.Models;
+using AZMA.TestClient.Emulators.Models;
 
 namespace AZMA.TestClient.Emulators.MetricAlerts
 {
@@ -15,41 +16,33 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
             : base(testSession, testApiHttpClient, emulatorConfiguration)
         {}
 
-        public Task EmulateAllScenarios()
+        public async Task EmulateAllScenarios()
         {
-            throw new NotImplementedException();
+            _testSession.RunTests(TestId.TestId_Muc4A1, TestId.TestId_Muc4A2);
+
+            await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(12), TimeSpan.FromMilliseconds(100), HttpStatusCode.InternalServerError, TimeSpan.FromMilliseconds(0)));
         }
 
         /// <summary>
-        /// At least 50% of requests receives response with 500 or 400 response code for 15 minutes
+        /// At least 50% of requests receives response with 500 or 400 response code for 10 minutes
         /// </summary>
         /// <returns></returns>
-        public async Task EmulateScenarioA1()
+        public async Task<EmulationResult> EmulateScenarioA1()
         {
             _testSession.RunTest(TestId.TestId_Muc4A1);
 
-            int numberOfCustomizedCallsWith500ResponseCode = EmulatorConfiguration.DefaultNumberOfRestCalls / 100 * 25;
-            int numberOfCustomizedCallsWith400ResponseCode = EmulatorConfiguration.DefaultNumberOfRestCalls / 100 * 25;
-            int numberOfNormalCalls = EmulatorConfiguration.DefaultNumberOfRestCalls - numberOfCustomizedCallsWith500ResponseCode - numberOfCustomizedCallsWith400ResponseCode;
-
-            await Emulate(numberOfCustomizedCallsWith500ResponseCode, numberOfNormalCalls, 0, HttpStatusCode.InternalServerError);
-            await Emulate(numberOfCustomizedCallsWith400ResponseCode, 0, 0, HttpStatusCode.BadRequest);
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(12), TimeSpan.FromMilliseconds(100), HttpStatusCode.InternalServerError, TimeSpan.FromMilliseconds(0)));            
         }
 
         /// <summary>
-        /// At least 75% of requests receives response with 500 or 400 response code for 15 minutes
+        /// At least 75% of requests receives response with 500 or 400 response code for 5 minutes
         /// </summary>
         /// <returns></returns>
-        public async Task EmulateScenarioA2()
+        public async Task<EmulationResult> EmulateScenarioA2()
         {
             _testSession.RunTest(TestId.TestId_Muc4A2);
 
-            int numberOfCustomizedCallsWith500ResponseCode = EmulatorConfiguration.DefaultNumberOfRestCalls / 100 * 50;
-            int numberOfCustomizedCallsWith400ResponseCode = EmulatorConfiguration.DefaultNumberOfRestCalls / 100 * 25;
-            int numberOfNormalCalls = EmulatorConfiguration.DefaultNumberOfRestCalls - numberOfCustomizedCallsWith500ResponseCode - numberOfCustomizedCallsWith400ResponseCode;
-
-            await Emulate(numberOfCustomizedCallsWith500ResponseCode, numberOfNormalCalls, 0, HttpStatusCode.InternalServerError);
-            await Emulate(numberOfCustomizedCallsWith400ResponseCode, 0, 0, HttpStatusCode.BadRequest);
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(6), TimeSpan.FromMilliseconds(100), HttpStatusCode.InternalServerError, TimeSpan.FromMilliseconds(0)));
         }
     }
 }
