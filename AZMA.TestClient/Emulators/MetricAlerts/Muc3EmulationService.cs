@@ -19,8 +19,8 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
 
         /// <summary>
         /// Use case includes 2 scenarious:
-        /// 1. At least 50% of requests receives response with 502 response code for 5 minutes
-        /// 2. At least 75% of requests receives response with 502 response code for 1 minute
+        /// 1. If at least 50% of requests receives response with 502 response code for 5 minutes
+        /// 2. If at least 75% of requests receives response with 502 response code for 1 minute
         /// 
         /// So to cover all scenarious and get 2 alert notifications we need to have 75% of requests 502 response code for 1 minute
         /// </summary>
@@ -29,31 +29,31 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTests(TestId.TestId_Muc3A1, TestId.TestId_Muc3A2);
 
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(6), TimeSpan.FromMilliseconds(100), HttpStatusCode.BadGateway, TimeSpan.FromMilliseconds(0)));
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(7), TimeSpan.FromMilliseconds(500), HttpStatusCode.BadGateway, TimeSpan.FromMilliseconds(0)));
         }
 
         /// <summary>
         /// Condition:
-        /// At least 50% of requests receives response with 502 response code for 5 minutes
+        /// If at least 50% of requests receives response with 502 response code for 5 minutes
         /// </summary>
         /// <returns></returns>
         public async Task<EmulationResult> EmulateScenarioA1()
         {
             _testSession.RunTest(TestId.TestId_Muc3A1);
             
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(6), TimeSpan.FromMilliseconds(100), HttpStatusCode.BadGateway, TimeSpan.FromMilliseconds(0)));
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(7), TimeSpan.FromMilliseconds(500), HttpStatusCode.BadGateway, TimeSpan.FromMilliseconds(0)));
         }
 
         /// <summary>
         /// Condition:
-        /// At least 75% of requests receives response with 502 response code for 1 minute
+        /// If at least 75% of requests receives response with 502 response code for 1 minute
         /// </summary>
         /// <returns></returns>
         public async Task<EmulationResult> EmulateScenarioA2()
         {
             _testSession.RunTest(TestId.TestId_Muc3A2);
 
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(4), TimeSpan.FromMilliseconds(100), HttpStatusCode.BadGateway, TimeSpan.FromMilliseconds(0)));
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(7), TimeSpan.FromMilliseconds(500), HttpStatusCode.BadGateway, TimeSpan.FromMilliseconds(0)));
         }
     }
 }

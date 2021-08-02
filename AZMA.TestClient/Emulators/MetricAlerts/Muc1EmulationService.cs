@@ -17,64 +17,66 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
 
         /// <summary>
         /// Use case includes 4 scenarious:
-        /// 1. At least 50% of requests are processed with duration higher than 500 ms and it is observable during 5 min of time
-        /// 2. At least 50% of requests are processed with duration higher than 2000 ms in 5 min of time
-        /// 3. 95% of requests are processed with duration higher than 400 ms in 5 min of time  
-        /// 4. 95% or requests is processed with duration higher than 1000ms - for 5 min of time
+        /// 1. If at least 50% of requests are processed with duration higher than 500 ms and it is observable during 5 min of time
+        /// 2. If at least 50% of requests are processed with duration higher than 1000ms for 5 mins of time
+        /// 3. If at least 95% or requests is processed with duration higher than 500ms - for 1 mins of time
+        /// 4. If at least 95% or requests is processed with duration higher than 500ms - for 1 mins of time
         /// 
-        /// So to cover all scenarious and get 4 alert notifications we need to have 95% of requests with the duration higher than 2000ms
+        /// So to cover all scenarious and get 4 alert notifications we need to have 95% of requests with the duration higher than 1000ms
         /// </summary>
         /// <returns></returns>
         public async Task<EmulationResult> CombineAllScenariosInOne()
         {
             _testSession.RunTests(TestId.TestId_Muc1A1, TestId.TestId_Muc1A2, TestId.TestId_Muc1A3, TestId.TestId_Muc1A4);
 
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(6), TimeSpan.FromMilliseconds(100), HttpStatusCode.OK, TimeSpan.FromMilliseconds(2100)));
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(7), TimeSpan.FromMilliseconds(500), HttpStatusCode.OK, TimeSpan.FromMilliseconds(1100)));
         }
 
         /// <summary>
         /// Condition: 
-        /// At least 50% of requests are processed with duration higher than 500 ms and it is observable during 5 min of time
+        /// If at least 50% of requests are processed with duration higher than 500 ms and it is observable during 5 min of time
         /// </summary>
         /// <returns></returns>
         public async Task<EmulationResult> EmulateScenarioA1()
         {
             _testSession.RunTest(TestId.TestId_Muc1A1);
 
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(6), TimeSpan.FromMilliseconds(100), HttpStatusCode.OK, TimeSpan.FromMilliseconds(550)));
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(7), TimeSpan.FromMilliseconds(500), HttpStatusCode.OK, TimeSpan.FromMilliseconds(600)));
         }
 
         /// <summary>
-        /// At least 50% of requests are processed with duration higher than 2000 ms in 5 min of time
+        /// Condition:
+        /// If at least 50% of requests are processed with duration higher than 1000ms for 5 mins of time
         /// </summary>
         /// <returns></returns>        
         public async Task<EmulationResult> EmulateScenarioA2()
         {
             _testSession.RunTest(TestId.TestId_Muc1A2);
 
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(6), TimeSpan.FromMilliseconds(100), HttpStatusCode.OK, TimeSpan.FromMilliseconds(2100)));
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(7), TimeSpan.FromMilliseconds(500), HttpStatusCode.OK, TimeSpan.FromMilliseconds(1100)));
         }
 
         /// <summary>
-        /// 95% of requests are processed with duration higher than 400 ms in 5 min of time  
+        /// Condition:
+        /// If 95% or requests is processed with duration higher than 500ms - for 1 mins of time
         /// </summary>
         /// <returns></returns>
         public async Task<EmulationResult> EmulateScenarioA3()
         {
             _testSession.RunTest(TestId.TestId_Muc1A3);
 
-            return await Emulate(new Percentage(95), 400 + 1, System.Net.HttpStatusCode.OK);
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(7), TimeSpan.FromMilliseconds(500), HttpStatusCode.OK, TimeSpan.FromMilliseconds(600)));
         }
 
         /// <summary>
-        /// 95% or requests is processed with duration higher than 1000ms - for 5 min of time
+        /// If 95% or requests is processed with duration higher than 1000ms - for 1 min of time
         /// </summary>
         /// <returns></returns>
         public async Task<EmulationResult> EmulateScenarioA4()
         {
             _testSession.RunTest(TestId.TestId_Muc1A4);
 
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(6), TimeSpan.FromMilliseconds(100), HttpStatusCode.OK, TimeSpan.FromMilliseconds(1100)));
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(7), TimeSpan.FromMilliseconds(100), HttpStatusCode.OK, TimeSpan.FromMilliseconds(1100)));
         }
     }
 }

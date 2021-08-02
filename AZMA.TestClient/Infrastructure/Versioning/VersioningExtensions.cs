@@ -28,7 +28,7 @@ namespace AZMA.TestClient.Infrastructure.Versioning
                                    .HasApiVersion(apiVersion1_0);
                 options.Conventions.Controller<ControlPanelController>()
                                    .HasApiVersion(apiVersion1_0);
-                options.Conventions.Controller<MetricAlertsController>()
+                options.Conventions.Controller<ApimAlertsController>()
                                    .HasApiVersion(apiVersion1_0);
                 options.Conventions.Controller<QueryAlertsController>()
                                    .HasApiVersion(apiVersion1_0);
