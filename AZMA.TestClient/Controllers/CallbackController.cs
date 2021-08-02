@@ -28,7 +28,7 @@ namespace AZMA.TestClient.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("alert")]
         public async Task<IActionResult> Alert()
         {
