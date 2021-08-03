@@ -24,7 +24,7 @@ namespace TestClient.HttpClients
         {
             string url = $"{_testApiConfiguration.Url}?responseStatusCode={(int)expectedResponseStatusCode}&delay={expectedResponseDelay.Milliseconds}";
             if (expectedDelayOnApim.HasValue)
-                url += $"delayOnApim={expectedDelayOnApim.Value.Milliseconds}";
+                url += $"&delayOnApim={expectedDelayOnApim.Value.Milliseconds}";
             
             var httpResponseMessage = await _client.GetAsync(url);
             
