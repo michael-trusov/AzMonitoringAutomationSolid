@@ -35,7 +35,9 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
             var startDateTime = DateTime.Now;            
             while(emulationModel.TotalPeriod > DateTime.Now - startDateTime)
             {               
-                var testApiCallResult = await _testApiHttpClient.SendAsync(emulationModel.ExpectedResponseStatusCode, emulationModel.ExpectedResponseDelay);                                
+                var testApiCallResult = await _testApiHttpClient.SendAsync(emulationModel.ExpectedResponseStatusCode, 
+                                                                           emulationModel.ExpectedResponseDelay, 
+                                                                           emulationModel.ExpectedDelayOnApim);
                 if (testApiCallResult.HasError)
                     emulationResult.Errors.Add(testApiCallResult);
 

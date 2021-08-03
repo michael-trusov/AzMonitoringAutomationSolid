@@ -11,11 +11,18 @@ namespace AZMA.TestClient.Emulators.Models
             DelayBetweenRequests = delayBetweenRequests;
         }
 
-        public PeriodBasedEmulationModel(TimeSpan totalPeriod, TimeSpan delayBetweenRequests, HttpStatusCode expectedResponseStatusCode, TimeSpan expectedResponseDelay)
+        public PeriodBasedEmulationModel(TimeSpan totalPeriod, 
+                                         TimeSpan delayBetweenRequests, 
+                                         HttpStatusCode expectedResponseStatusCode, 
+                                         TimeSpan expectedResponseDelay, 
+                                         TimeSpan? expectedDelayOnApim = null)
             : base(expectedResponseStatusCode, expectedResponseDelay)
         {
             TotalPeriod = totalPeriod;
+
             DelayBetweenRequests = delayBetweenRequests;
+
+            ExpectedDelayOnApim = expectedDelayOnApim;
         }
 
         /// <summary>
@@ -27,5 +34,10 @@ namespace AZMA.TestClient.Emulators.Models
         /// Expected delay between requests
         /// </summary>
         public TimeSpan DelayBetweenRequests { get; }
+
+        /// <summary>
+        /// Expected delay on API Management instance
+        /// </summary>
+        public TimeSpan? ExpectedDelayOnApim { get; }
     }
 }

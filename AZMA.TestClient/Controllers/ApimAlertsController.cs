@@ -13,6 +13,7 @@ namespace AZMA.TestClient.Controllers
     public class ApimAlertsController : ControllerBase
     {
         private Muc1EmulationService _muc1EmulationService;
+        private Muc2EmulationService _muc2EmulationService;
         private Muc3EmulationService _muc3EmulationService;
         private Muc4EmulationService _muc4EmulationService;
         private Muc5EmulationService _muc5EmulationService;
@@ -20,6 +21,7 @@ namespace AZMA.TestClient.Controllers
         private Muc7EmulationService _muc7EmulationService;
 
         public ApimAlertsController(Muc1EmulationService muc1EmulationService,
+                                    Muc2EmulationService muc2EmulationService,
                                     Muc3EmulationService muc3EmulationService,
                                     Muc4EmulationService muc4EmulationService,
                                     Muc5EmulationService muc5EmulationService,
@@ -27,6 +29,7 @@ namespace AZMA.TestClient.Controllers
                                     Muc7EmulationService muc7EmulationService)
         {
             _muc1EmulationService = muc1EmulationService;
+            _muc2EmulationService = muc2EmulationService;
             _muc3EmulationService = muc3EmulationService;
             _muc4EmulationService = muc4EmulationService;
             _muc5EmulationService = muc5EmulationService;
@@ -95,6 +98,14 @@ namespace AZMA.TestClient.Controllers
         public IActionResult alertMuc1A4()
         {
             Task.Run(async () => await _muc1EmulationService.EmulateScenarioA4());
+
+            return new OkResult();
+        }
+
+        [HttpGet("alert-muc2A1")]
+        public IActionResult alertMuc2A1()
+        {
+            Task.Run(async () => await _muc2EmulationService.EmulateScenarioA1());
 
             return new OkResult();
         }

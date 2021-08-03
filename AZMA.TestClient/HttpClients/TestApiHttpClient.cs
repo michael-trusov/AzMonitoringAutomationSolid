@@ -20,9 +20,13 @@ namespace TestClient.HttpClients
             _testApiConfiguration = testApiConfiguration;
         }
 
-        public async Task<TestApiCallResult> SendAsync(HttpStatusCode expectedResponseStatusCode, TimeSpan expectedResponseDelay)
+        public async Task<TestApiCallResult> SendAsync(HttpStatusCode expectedResponseStatusCode, TimeSpan expectedResponseDelay, TimeSpan? expectedDelayOnApim = null)
         {
-            var httpResponseMessage = await _client.GetAsync($"{_testApiConfiguration.Url}?responseStatusCode={(int)expectedResponseStatusCode}&delay={expectedResponseDelay.Milliseconds}");
+            string url = $"{_testApiConfiguration.Url}?responseStatusCode={(int)expectedResponseStatusCode}&delay={expectedResponseDelay.Milliseconds}";
+            if (expectedDelayOnApim.HasValue)
+                url += $"delayOnApim={expectedDelayOnApim.Value.Milliseconds}";
+            
+            var httpResponseMessage = await _client.GetAsync(url);
             
             return new TestApiCallResult(httpResponseMessage, expectedResponseStatusCode);
         }
