@@ -29,7 +29,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTests(TestId.TestId_Muc1A1, TestId.TestId_Muc1A2, TestId.TestId_Muc1A3, TestId.TestId_Muc1A4);
 
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(7), TimeSpan.FromMilliseconds(500), HttpStatusCode.OK, TimeSpan.FromMilliseconds(1100)));
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(7), TimeSpan.FromMilliseconds(100), HttpStatusCode.OK, TimeSpan.FromMilliseconds(1100)));
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTest(TestId.TestId_Muc1A1);
 
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(7), TimeSpan.FromMilliseconds(500), HttpStatusCode.OK, TimeSpan.FromMilliseconds(600)));
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(7), TimeSpan.FromMilliseconds(100), HttpStatusCode.OK, TimeSpan.FromMilliseconds(600)));
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTest(TestId.TestId_Muc1A2);
 
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(7), TimeSpan.FromMilliseconds(500), HttpStatusCode.OK, TimeSpan.FromMilliseconds(1100)));
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(7), TimeSpan.FromMilliseconds(100), HttpStatusCode.OK, TimeSpan.FromMilliseconds(1100)));
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTest(TestId.TestId_Muc1A3);
 
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(7), TimeSpan.FromMilliseconds(500), HttpStatusCode.OK, TimeSpan.FromMilliseconds(600)));
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(7), TimeSpan.FromMilliseconds(100), HttpStatusCode.OK, TimeSpan.FromMilliseconds(600)));
         }
 
         /// <summary>

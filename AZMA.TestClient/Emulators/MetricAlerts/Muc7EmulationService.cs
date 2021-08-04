@@ -28,7 +28,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTests(TestId.TestId_Muc7A1, TestId.TestId_Muc7A2);
 
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(12), TimeSpan.FromMilliseconds(500), HttpStatusCode.NotFound, TimeSpan.FromMilliseconds(0)));
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(12), TimeSpan.FromMilliseconds(100), HttpStatusCode.NotFound, TimeSpan.FromMilliseconds(0)));
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTest(TestId.TestId_Muc7A1);
 
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(12), TimeSpan.FromMilliseconds(500), HttpStatusCode.NotFound, TimeSpan.FromMilliseconds(0)));
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(12), TimeSpan.FromMilliseconds(100), HttpStatusCode.NotFound, TimeSpan.FromMilliseconds(0)));
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTest(TestId.TestId_Muc7A2);
 
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(7), TimeSpan.FromMilliseconds(500), HttpStatusCode.NotFound, TimeSpan.FromMilliseconds(0)));
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(7), TimeSpan.FromMilliseconds(100), HttpStatusCode.NotFound, TimeSpan.FromMilliseconds(0)));
         }
     }
 }
