@@ -48,8 +48,9 @@ namespace AZMA.TestClient.Controllers
         {
             Task.Run(async () =>
             {
-                await _muc1EmulationService.CombineAllScenariosInOne(); 
+                await _muc1EmulationService.CombineAllScenariosInOne();
                 
+                Thread.Sleep(TimeSpan.FromMinutes(18));
             })
             .ContinueWith(async (t) =>
             {
