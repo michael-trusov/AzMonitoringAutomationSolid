@@ -8,6 +8,7 @@ using TestClient.HttpClients;
 using AZMA.TestClient.Models;
 using AZMA.Application.Interfaces;
 using AZMA.TestClient.Emulators.Models;
+using System.Threading;
 
 namespace AZMA.TestClient.Emulators.MetricAlerts
 {
@@ -25,11 +26,13 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         /// So to cover all scenarious and get 2 alert notifications we need to have 75% of requests 502 response code for 1 minute
         /// </summary>
         /// <returns></returns>
-        public async Task<EmulationResult> CombineAllScenariosInOne()
+        public async Task CombineAllScenariosInOne()
         {
-            _testSession.RunTests(TestId.TestId_Muc3A1, TestId.TestId_Muc3A2);
+            //_testSession.RunTests(TestId.TestId_Muc3A1, TestId.TestId_Muc3A2);
 
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(18), TimeSpan.FromMilliseconds(300), HttpStatusCode.BadGateway, TimeSpan.FromMilliseconds(0)));
+            await EmulateScenarioA1();
+            Thread.Sleep(TimeSpan.FromMinutes(2));
+            await EmulateScenarioA2();
         }
 
         /// <summary>
@@ -41,7 +44,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTest(TestId.TestId_Muc3A1);
             
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(7), TimeSpan.FromMilliseconds(100), HttpStatusCode.BadGateway, TimeSpan.FromMilliseconds(0)));
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(5), TimeSpan.FromMilliseconds(900), HttpStatusCode.BadGateway, TimeSpan.FromMilliseconds(0)));
         }
 
         /// <summary>
@@ -53,7 +56,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTest(TestId.TestId_Muc3A2);
 
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(7), TimeSpan.FromMilliseconds(100), HttpStatusCode.BadGateway, TimeSpan.FromMilliseconds(0)));
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(2), TimeSpan.FromMilliseconds(500), HttpStatusCode.BadGateway, TimeSpan.FromMilliseconds(0)));
         }
     }
 }

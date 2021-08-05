@@ -61,7 +61,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTest(TestId.TestId_Muc1A2);
 
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(6), TimeSpan.FromMilliseconds(0), HttpStatusCode.OK, TimeSpan.FromMilliseconds(1100)));
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(6), TimeSpan.FromMilliseconds(0), HttpStatusCode.OK, TimeSpan.FromMilliseconds(2500)));
         }
 
         /// <summary>

@@ -51,11 +51,11 @@ namespace AZMA.TestClient.Controllers
                 await _muc1EmulationService.CombineAllScenariosInOne();
 
                 //Thread.Sleep(TimeSpan.FromMinutes(18));
+            })
+            .ContinueWith(async (t) =>
+            {
+                await _muc3EmulationService.CombineAllScenariosInOne();
             });
-            //.ContinueWith(async (t) =>
-            //{
-            //    await _muc3EmulationService.CombineAllScenariosInOne();                    
-            //})
             //.ContinueWith(async (t) =>
             //{
             //    await _muc4EmulationService.CombineAllScenariosInOne();
