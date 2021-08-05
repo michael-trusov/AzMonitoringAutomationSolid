@@ -5,6 +5,7 @@ using AZMA.TestClient.Emulators.Models;
 using AZMA.TestClient.Infrastructure.Configuration;
 using System;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using TestClient.HttpClients;
 
@@ -24,23 +25,23 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         /// So to cover all scenarious and get 2 alert notifications we need to have 75% of requests 401 response code for 10 minute 
         /// </summary>
         /// <returns></returns>
-        public async Task<EmulationResult> CombineAllScenariosInOne()
+        public async Task CombineAllScenariosInOne()
         {
-            _testSession.RunTests(TestId.TestId_Muc7A1, TestId.TestId_Muc7A2);
-
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(18), TimeSpan.FromMilliseconds(300), HttpStatusCode.NotFound, TimeSpan.FromMilliseconds(0)));
+            await EmulateScenarioA1();
+            Thread.Sleep(TimeSpan.FromMinutes(2));
+            await EmulateScenarioA2();
         }
 
         /// <summary>
         /// Condition: 
-        /// If at least 50% of requests receives 404 response code for 10 minutes
+        /// If at least 50% of requests receives 404 response code for 15 minutes
         /// </summary>
         /// <returns></returns>
         public async Task<EmulationResult> EmulateScenarioA1()
         {
             _testSession.RunTest(TestId.TestId_Muc7A1);
 
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(12), TimeSpan.FromMilliseconds(100), HttpStatusCode.NotFound, TimeSpan.FromMilliseconds(0)));
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(15), TimeSpan.FromMilliseconds(900), HttpStatusCode.NotFound, TimeSpan.FromMilliseconds(0)));
         }
 
         /// <summary>
@@ -51,7 +52,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTest(TestId.TestId_Muc7A2);
 
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(7), TimeSpan.FromMilliseconds(100), HttpStatusCode.NotFound, TimeSpan.FromMilliseconds(0)));
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(5), TimeSpan.FromMilliseconds(900), HttpStatusCode.NotFound, TimeSpan.FromMilliseconds(0)));
         }
     }
 }

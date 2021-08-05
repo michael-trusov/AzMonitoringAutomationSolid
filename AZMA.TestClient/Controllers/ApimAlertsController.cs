@@ -58,22 +58,22 @@ namespace AZMA.TestClient.Controllers
             })
             .ContinueWith(async (t) =>
             {
-                _muc4EmulationService.CombineAllScenariosInOne();
+                //_muc4EmulationService.CombineAllScenariosInOne();
 
-                Thread.Sleep(TimeSpan.FromMinutes(18));
+                //Thread.Sleep(TimeSpan.FromMinutes(18));
             })
             .ContinueWith(async (t) =>
             {
-                await _muc5EmulationService.CombineAllScenariosInOne();
+                //await _muc5EmulationService.CombineAllScenariosInOne();
+            })
+            .ContinueWith(async (t) =>
+            {
+                await _muc6EmulationService.CombineAllScenariosInOne();
+            })
+            .ContinueWith(async (t) =>
+            {
+                await _muc7EmulationService.CombineAllScenariosInOne();
             });
-            //.ContinueWith(async (t) =>
-            //{
-            //    await _muc6EmulationService.CombineAllScenariosInOne();
-            //})
-            //.ContinueWith(async (t) =>
-            //{
-            //    await _muc7EmulationService.CombineAllScenariosInOne();
-            //});
 
             return new OkResult();
         }
