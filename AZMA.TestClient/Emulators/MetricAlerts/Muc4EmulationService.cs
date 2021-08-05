@@ -29,29 +29,29 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTests(TestId.TestId_Muc4A1, TestId.TestId_Muc4A2);
 
-            Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(18), TimeSpan.FromMilliseconds(300), HttpStatusCode.InternalServerError, TimeSpan.FromMilliseconds(0)));
+            Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(15), TimeSpan.FromMilliseconds(300), HttpStatusCode.InternalServerError, TimeSpan.FromMilliseconds(0)));
 
-            Thread.Sleep(500);
+            Thread.Sleep(200);
 
-            Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(18), TimeSpan.FromMilliseconds(400), HttpStatusCode.BadRequest, TimeSpan.FromMilliseconds(0)));
+            Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(15), TimeSpan.FromMilliseconds(400), HttpStatusCode.BadRequest, TimeSpan.FromMilliseconds(0)));
 
             return Task.CompletedTask;
         }
 
         /// <summary>
         /// Condition:
-        /// If at least 50% of requests receives response with 500 or 400 response code for 10 minutes
+        /// If at least 50% of requests receives response with 500 or 400 response code for 15 minutes
         /// </summary>
         /// <returns></returns>
         public Task EmulateScenarioA1()
         {
             _testSession.RunTest(TestId.TestId_Muc4A1);
 
-            Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(12), TimeSpan.FromMilliseconds(100), HttpStatusCode.InternalServerError, TimeSpan.FromMilliseconds(0)));
+            Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(15), TimeSpan.FromMilliseconds(1000), HttpStatusCode.InternalServerError, TimeSpan.FromMilliseconds(0)));
             
             Thread.Sleep(500);
             
-            Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(12), TimeSpan.FromMilliseconds(200), HttpStatusCode.BadRequest, TimeSpan.FromMilliseconds(0)));
+            Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(15), TimeSpan.FromMilliseconds(1000), HttpStatusCode.BadRequest, TimeSpan.FromMilliseconds(0)));
 
             return Task.CompletedTask;
         }
@@ -64,11 +64,11 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTest(TestId.TestId_Muc4A2);
 
-            Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(7), TimeSpan.FromMilliseconds(100), HttpStatusCode.InternalServerError, TimeSpan.FromMilliseconds(0)));
+            Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(5), TimeSpan.FromMilliseconds(400), HttpStatusCode.InternalServerError, TimeSpan.FromMilliseconds(0)));
 
             Thread.Sleep(500);
 
-            Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(7), TimeSpan.FromMilliseconds(200), HttpStatusCode.BadRequest, TimeSpan.FromMilliseconds(0)));
+            Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(5), TimeSpan.FromMilliseconds(500), HttpStatusCode.BadRequest, TimeSpan.FromMilliseconds(0)));
 
             return Task.CompletedTask;
         }
