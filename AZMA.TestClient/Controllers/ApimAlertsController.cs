@@ -48,34 +48,22 @@ namespace AZMA.TestClient.Controllers
         {
             Task.Run(async () =>
             {
+                await _muc1EmulationService.CombineAllScenariosInOne();
+                Thread.Sleep(TimeSpan.FromMinutes(2));
+                
+                await _muc3EmulationService.CombineAllScenariosInOne();
+                Thread.Sleep(TimeSpan.FromMinutes(2));
+
+                await _muc4EmulationService.CombineAllScenariosInOne();
+                Thread.Sleep(TimeSpan.FromMinutes(2));
+
+                await _muc5EmulationService.CombineAllScenariosInOne();
+                Thread.Sleep(TimeSpan.FromMinutes(2));
+
                 await _muc6EmulationService.CombineAllScenariosInOne();
                 Thread.Sleep(TimeSpan.FromMinutes(2));
+
                 await _muc7EmulationService.CombineAllScenariosInOne();
-                //await _muc1EmulationService.CombineAllScenariosInOne();
-
-                //Thread.Sleep(TimeSpan.FromMinutes(18));
-            })
-            .ContinueWith(async (t) =>
-            {
-                //await _muc3EmulationService.CombineAllScenariosInOne();
-            })
-            .ContinueWith(async (t) =>
-            {
-                //_muc4EmulationService.CombineAllScenariosInOne();
-
-                //Thread.Sleep(TimeSpan.FromMinutes(18));
-            })
-            .ContinueWith(async (t) =>
-            {
-                //await _muc5EmulationService.CombineAllScenariosInOne();
-            })
-            .ContinueWith(async (t) =>
-            {
-                //await _muc6EmulationService.CombineAllScenariosInOne();
-            })
-            .ContinueWith(async (t) =>
-            {
-                //await _muc7EmulationService.CombineAllScenariosInOne();
             });
 
             return new OkResult();
@@ -113,13 +101,13 @@ namespace AZMA.TestClient.Controllers
             return new OkResult();
         }
 
-        [HttpGet("alert-muc2A1")]
-        public IActionResult alertMuc2A1()
-        {
-            Task.Run(async () => await _muc2EmulationService.EmulateScenarioA1());
+        //[HttpGet("alert-muc2A1")]
+        //public IActionResult alertMuc2A1()
+        //{
+        //    Task.Run(async () => await _muc2EmulationService.EmulateScenarioA1());
 
-            return new OkResult();
-        }
+        //    return new OkResult();
+        //}
 
         [HttpGet("alert-muc3A1")]
         public IActionResult alertMuc3A1()

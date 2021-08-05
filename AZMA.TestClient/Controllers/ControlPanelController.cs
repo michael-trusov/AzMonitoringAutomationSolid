@@ -15,29 +15,29 @@ using TestClient.HttpClients;
 
 namespace TestClient.Controllers
 {
-    [Route("api/control-panel")]
-    [AllowAnonymous]
-    [ApiController]
-    public class ControlPanelController : ControllerBase
-    {
-        private Muc1EmulationService _muc1EmulationService;
-        private Muc3EmulationService _muc3EmulationService;
+    //[Route("api/control-panel")]
+    //[AllowAnonymous]
+    //[ApiController]
+    //public class ControlPanelController : ControllerBase
+    //{
+    //    private Muc1EmulationService _muc1EmulationService;
+    //    private Muc3EmulationService _muc3EmulationService;
 
-        private ILogger<ControlPanelController> _logger;
+    //    private ILogger<ControlPanelController> _logger;
 
-        private object _lockTest = new object();
-        private static int _counter = 0;
+    //    private object _lockTest = new object();
+    //    private static int _counter = 0;
 
-        public ControlPanelController(Muc1EmulationService muc1EmulationService, 
-                                      Muc3EmulationService muc3EmulationService, 
-                                      ILogger<ControlPanelController> logger)
-        {
-            _muc1EmulationService = muc1EmulationService;
-            _muc3EmulationService = muc3EmulationService;
+    //    public ControlPanelController(Muc1EmulationService muc1EmulationService, 
+    //                                  Muc3EmulationService muc3EmulationService, 
+    //                                  ILogger<ControlPanelController> logger)
+    //    {
+    //        _muc1EmulationService = muc1EmulationService;
+    //        _muc3EmulationService = muc3EmulationService;
 
-            _logger = logger;
-        }
+    //        _logger = logger;
+    //    }
 
         
-    }
+    //}
 }

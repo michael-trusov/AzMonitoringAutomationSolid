@@ -22,16 +22,17 @@ namespace AZMA.TestClient.Infrastructure.Versioning
                 // Note: define api version for the controllers
                 var apiVersion1_0 = new ApiVersion(1, 0);
 
-                options.Conventions.Controller<ActivityLogAlertsController>()                                   
-                                   .HasApiVersion(apiVersion1_0);
+                //options.Conventions.Controller<ActivityLogAlertsController>()                                   
+               //                    .HasApiVersion(apiVersion1_0);
+
                 options.Conventions.Controller<CallbackController>()
                                    .HasApiVersion(apiVersion1_0);
-                options.Conventions.Controller<ControlPanelController>()
-                                   .HasApiVersion(apiVersion1_0);
+                //options.Conventions.Controller<ControlPanelController>()
+                //                   .HasApiVersion(apiVersion1_0);
                 options.Conventions.Controller<ApimAlertsController>()
                                    .HasApiVersion(apiVersion1_0);
-                options.Conventions.Controller<QueryAlertsController>()
-                                   .HasApiVersion(apiVersion1_0);
+                //options.Conventions.Controller<QueryAlertsController>()
+                //                   .HasApiVersion(apiVersion1_0);
                 options.Conventions.Controller<ReportController>()
                                    .HasApiVersion(apiVersion1_0);
 
