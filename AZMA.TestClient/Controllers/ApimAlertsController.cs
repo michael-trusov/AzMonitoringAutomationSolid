@@ -48,6 +48,9 @@ namespace AZMA.TestClient.Controllers
         {
             Task.Run(async () =>
             {
+                await _muc6EmulationService.CombineAllScenariosInOne();
+                Thread.Sleep(TimeSpan.FromMinutes(2));
+                await _muc7EmulationService.CombineAllScenariosInOne();
                 //await _muc1EmulationService.CombineAllScenariosInOne();
 
                 //Thread.Sleep(TimeSpan.FromMinutes(18));
@@ -68,11 +71,11 @@ namespace AZMA.TestClient.Controllers
             })
             .ContinueWith(async (t) =>
             {
-                await _muc6EmulationService.CombineAllScenariosInOne();
+                //await _muc6EmulationService.CombineAllScenariosInOne();
             })
             .ContinueWith(async (t) =>
             {
-                await _muc7EmulationService.CombineAllScenariosInOne();
+                //await _muc7EmulationService.CombineAllScenariosInOne();
             });
 
             return new OkResult();
