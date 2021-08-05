@@ -2,6 +2,7 @@
 using AZMA.TestClient.Emulators.Models;
 using AZMA.TestClient.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,13 +21,16 @@ namespace AZMA.TestClient.Controllers
         private Muc6EmulationService _muc6EmulationService;
         private Muc7EmulationService _muc7EmulationService;
 
+        private ILogger<ApimAlertsController> _logger;
+
         public ApimAlertsController(Muc1EmulationService muc1EmulationService,
                                     Muc2EmulationService muc2EmulationService,
                                     Muc3EmulationService muc3EmulationService,
                                     Muc4EmulationService muc4EmulationService,
                                     Muc5EmulationService muc5EmulationService,
                                     Muc6EmulationService muc6EmulationService,
-                                    Muc7EmulationService muc7EmulationService)
+                                    Muc7EmulationService muc7EmulationService,
+                                    ILogger<ApimAlertsController> logger)
         {
             _muc1EmulationService = muc1EmulationService;
             _muc2EmulationService = muc2EmulationService;
@@ -35,6 +39,8 @@ namespace AZMA.TestClient.Controllers
             _muc5EmulationService = muc5EmulationService;
             _muc6EmulationService = muc6EmulationService; 
             _muc7EmulationService = muc7EmulationService;
+
+            _logger = logger;
         }
 
         [HttpGet("run-all-tests")]
@@ -42,7 +48,8 @@ namespace AZMA.TestClient.Controllers
         {
             Task.Run(async () =>
             {
-                await _muc1EmulationService.CombineAllScenariosInOne();                
+                await _muc1EmulationService.CombineAllScenariosInOne(); 
+                
             })
             .ContinueWith(async (t) =>
             {
@@ -52,7 +59,7 @@ namespace AZMA.TestClient.Controllers
             {
                 await _muc4EmulationService.CombineAllScenariosInOne();
 
-                Thread.Sleep(15 * 1000);
+                Thread.Sleep(TimeSpan.FromMinutes(18));
             })
             .ContinueWith(async (t) =>
             {

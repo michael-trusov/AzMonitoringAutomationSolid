@@ -29,11 +29,11 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTests(TestId.TestId_Muc4A1, TestId.TestId_Muc4A2);
 
-            Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(12), TimeSpan.FromMilliseconds(100), HttpStatusCode.InternalServerError, TimeSpan.FromMilliseconds(0)));
+            Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(18), TimeSpan.FromMilliseconds(300), HttpStatusCode.InternalServerError, TimeSpan.FromMilliseconds(0)));
 
             Thread.Sleep(500);
 
-            Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(12), TimeSpan.FromMilliseconds(200), HttpStatusCode.BadRequest, TimeSpan.FromMilliseconds(0)));
+            Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(18), TimeSpan.FromMilliseconds(400), HttpStatusCode.BadRequest, TimeSpan.FromMilliseconds(0)));
 
             return Task.CompletedTask;
         }
