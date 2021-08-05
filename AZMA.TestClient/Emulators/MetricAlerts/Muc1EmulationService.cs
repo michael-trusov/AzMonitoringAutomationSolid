@@ -26,17 +26,11 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         /// So to cover all scenarious and get 4 alert notifications we need to have 95% of requests with the duration higher than 1000ms
         /// </summary>
         /// <returns></returns>
-        public Task CombineAllScenariosInOne()
+        public async Task CombineAllScenariosInOne()
         {
             _testSession.RunTests(TestId.TestId_Muc1A1, TestId.TestId_Muc1A2, TestId.TestId_Muc1A3, TestId.TestId_Muc1A4);
 
-            for (int i = 0; i < 50; ++i)
-            {
-                Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(18), TimeSpan.FromMilliseconds(0), HttpStatusCode.OK, TimeSpan.FromMilliseconds(1100)));
-                Thread.Sleep(100);
-            }
-
-            return Task.CompletedTask;
+             await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(5), TimeSpan.FromMilliseconds(0), HttpStatusCode.OK, TimeSpan.FromMilliseconds(1100)));            
         }
 
         /// <summary>
@@ -48,7 +42,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTest(TestId.TestId_Muc1A1);
 
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(18), TimeSpan.FromMilliseconds(0), HttpStatusCode.OK, TimeSpan.FromMilliseconds(600)));
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(5), TimeSpan.FromMilliseconds(0), HttpStatusCode.OK, TimeSpan.FromMilliseconds(600)));
         }
 
         /// <summary>
@@ -60,7 +54,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTest(TestId.TestId_Muc1A2);
 
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(18), TimeSpan.FromMilliseconds(0), HttpStatusCode.OK, TimeSpan.FromMilliseconds(1100)));
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(5), TimeSpan.FromMilliseconds(0), HttpStatusCode.OK, TimeSpan.FromMilliseconds(1100)));
         }
 
         /// <summary>
@@ -72,7 +66,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTest(TestId.TestId_Muc1A3);
 
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(18), TimeSpan.FromMilliseconds(0), HttpStatusCode.OK, TimeSpan.FromMilliseconds(600)));
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(5), TimeSpan.FromMilliseconds(0), HttpStatusCode.OK, TimeSpan.FromMilliseconds(600)));
         }
 
         /// <summary>
@@ -83,7 +77,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTest(TestId.TestId_Muc1A4);
 
-            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(18), TimeSpan.FromMilliseconds(0), HttpStatusCode.OK, TimeSpan.FromMilliseconds(1100)));
+            return await Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(5), TimeSpan.FromMilliseconds(0), HttpStatusCode.OK, TimeSpan.FromMilliseconds(1100)));
         }
     }
 }
