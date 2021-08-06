@@ -16,16 +16,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         public Muc5EmulationService(ITestSession testSession, TestApiHttpClient testApiHttpClient, IEmulatorConfiguration emulatorConfiguration)
             : base(testSession, testApiHttpClient, emulatorConfiguration)
         {}
-
-        /// <summary>
-        /// Use case includes 2 scenarious:
-        /// 1. If at least 50% of requests receives 403 response code for 15 minutes
-        /// 2. If at least 75% of requests receives 403 response code for 5 minutes
-        /// 
-        /// So to cover all scenarious and get 2 alert notifications we need to have 75% of requests 403 response code for 10 minute
-
-        /// </summary>
-        /// <returns></returns>
+        
         public async Task CombineAllScenariosInOne()
         {
             await EmulateScenarioA1();

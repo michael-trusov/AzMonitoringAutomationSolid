@@ -8,6 +8,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>c:\.Projects\CTCO-APIM\MonitoringTestsAutomation\AzMonitoringAutomation\AZMA.TestClient\AZMA.TestClient.xml</DocumentationFile>
+    <NoWarn>1591;1701;1702</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

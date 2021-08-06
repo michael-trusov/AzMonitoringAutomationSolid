@@ -3,7 +3,6 @@ using AZMA.TestClient.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.DependencyInjection;
-using TestClient.Controllers;
 
 namespace AZMA.TestClient.Infrastructure.Versioning
 {

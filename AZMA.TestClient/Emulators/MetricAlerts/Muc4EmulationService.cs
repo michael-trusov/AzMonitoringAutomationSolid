@@ -46,10 +46,8 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
         {
             _testSession.RunTest(TestId.TestId_Muc4A1);
 
-            Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(15), TimeSpan.FromMilliseconds(1000), HttpStatusCode.InternalServerError, TimeSpan.FromMilliseconds(0)));
-            
-            Thread.Sleep(500);
-            
+            Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(15), TimeSpan.FromMilliseconds(1000), HttpStatusCode.InternalServerError, TimeSpan.FromMilliseconds(0)));            
+            Thread.Sleep(500);            
             Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(15), TimeSpan.FromMilliseconds(1000), HttpStatusCode.BadRequest, TimeSpan.FromMilliseconds(0)));
 
             return Task.CompletedTask;
@@ -64,9 +62,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
             _testSession.RunTest(TestId.TestId_Muc4A2);
 
             Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(5), TimeSpan.FromMilliseconds(400), HttpStatusCode.InternalServerError, TimeSpan.FromMilliseconds(0)));
-
             Thread.Sleep(500);
-
             Emulate(new PeriodBasedEmulationModel(TimeSpan.FromMinutes(5), TimeSpan.FromMilliseconds(500), HttpStatusCode.BadRequest, TimeSpan.FromMilliseconds(0)));
 
             return Task.CompletedTask;

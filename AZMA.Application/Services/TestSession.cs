@@ -103,8 +103,7 @@ namespace AZMA.Application.Services
             {
                 TestCaseDescription testScenario = _testCasesDescriptions.FindByTestId(test.Id);
 
-                TestItem originalTestItem;
-                if (_tests.TryRemove(testScenario.Id, out originalTestItem))
+                if (_tests.TryRemove(testScenario.Id, out TestItem originalTestItem))
                 {
                     _testsDataStorage.Add(new TestHistoryDataItem
                     {
@@ -151,8 +150,7 @@ namespace AZMA.Application.Services
         {
             TestCaseDescription testcaseDescription = GetTestScenarioByRuleName(alertStandardSchema.Data.Essentials.AlertRule);
 
-            TestItem originalTestItem;
-            if (_tests.TryRemove(testcaseDescription.Id, out originalTestItem))
+            if (_tests.TryRemove(testcaseDescription.Id, out TestItem originalTestItem))
             {
                 _testsDataStorage.Add(new TestHistoryDataItem
                 {
@@ -189,7 +187,7 @@ namespace AZMA.Application.Services
         private TestCaseDescription GetTestScenarioByRuleName(string alertRuleName)
         {
             var nameParts = alertRuleName.Split('-');
-            var alertName = nameParts[nameParts.Length - 2];
+            var alertName = nameParts[^2];
 
             return _testCasesDescriptions.FindByTestName(alertName);
         }       

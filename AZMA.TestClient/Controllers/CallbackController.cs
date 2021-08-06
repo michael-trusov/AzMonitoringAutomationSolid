@@ -12,7 +12,7 @@ namespace AZMA.TestClient.Controllers
     [ApiController]
     public class CallbackController : ControllerBase
     {
-        private ITestSession _testSession;
+        private readonly  ITestSession _testSession;
 
         public CallbackController(ITestSession testSession)
         {
@@ -21,7 +21,7 @@ namespace AZMA.TestClient.Controllers
 
         [HttpPost]
         [Route("noi")]
-        public async Task<IActionResult> Noi([FromBody] NoiPayload noiPayload)
+        public IActionResult Noi([FromBody] NoiPayload noiPayload)
         {
             _testSession.Passed(noiPayload);           
 

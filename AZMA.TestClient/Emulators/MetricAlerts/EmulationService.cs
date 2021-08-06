@@ -16,7 +16,7 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
     {
         protected ITestSession _testSession;
 
-        private TestApiHttpClient _testApiHttpClient;        
+        private readonly TestApiHttpClient _testApiHttpClient;        
 
         public EmulationService(ITestSession testSession, TestApiHttpClient testApiHttpClient, IEmulatorConfiguration emulatorConfiguration)
         {
@@ -48,15 +48,8 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
 
             return emulationResult;
         }
-
-        /// <summary>
-        /// Calculate number of REST calls which should have specified response delay and response status code and number of 'normal' REST calls without any delay; do the calls to the
-        /// Test API specified in settings.        
-        /// </summary>
-        /// <param name="percentageOfCustomizedCalls">Percentage of REST calls which should have specified response delay and response status code.</param>
-        /// <param name="responseDelayInMilliseconds">Response delay.</param>
-        /// <returns></returns>
-        protected async Task<EmulationResult> Emulate(Percentage percentageOfCustomizedCalls, int responseDelayInMilliseconds, HttpStatusCode expectedResponseStatusCode)
+        
+        protected Task<EmulationResult> Emulate(Percentage percentageOfCustomizedCalls, int responseDelayInMilliseconds, HttpStatusCode expectedResponseStatusCode)
         {
             throw new NotImplementedException();
 
@@ -65,16 +58,8 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
 
             //return await Emulate(numberOfCustomizedCalls, numberOfNormalCalls, responseDelayInMilliseconds, expectedResponseStatusCode);
         }
-
-        /// <summary>
-        /// Do the specified number of 'customized' and 'normal' calls to the Test API specified in settings.
-        /// </summary>
-        /// <param name="numberOfCustomizedCalls"></param>
-        /// <param name="numberOfNormalCalls"></param>
-        /// <param name="responseDelayInMilliseconds"></param>
-        /// <param name="expectedResponseStatusCode"></param>
-        /// <returns></returns>
-        protected async Task<EmulationResult> Emulate(int numberOfCustomizedCalls, int numberOfNormalCalls, int responseDelayInMilliseconds, HttpStatusCode expectedResponseStatusCode)
+        
+        protected Task<EmulationResult> Emulate(int numberOfCustomizedCalls, int numberOfNormalCalls, int responseDelayInMilliseconds, HttpStatusCode expectedResponseStatusCode)
         {
             throw new NotImplementedException();
             //EmulationResult emulationCallsResult = new EmulationResult();

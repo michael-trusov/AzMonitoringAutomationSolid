@@ -12,7 +12,7 @@ namespace AZMA.TestClient.Controllers
     [ApiController]
     public class ReportController : ControllerBase
     {
-        private IHistoryDataStorage<TestHistoryDataItem> _testingHistoryDataItems;
+        private readonly IHistoryDataStorage<TestHistoryDataItem> _testingHistoryDataItems;
 
         public ReportController(IHistoryDataStorage<TestHistoryDataItem> testingHistoryDataItems)
         {
