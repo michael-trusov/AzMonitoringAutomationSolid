@@ -18,7 +18,8 @@ namespace AZMA.TestClient.Infrastructure.DependencyInjection
             serviceCollection.AddTransient<Muc4EmulationService>();
             serviceCollection.AddTransient<Muc5EmulationService>();
             serviceCollection.AddTransient<Muc6EmulationService>();
-            serviceCollection.AddTransient<Muc7EmulationService>();            
+            serviceCollection.AddTransient<Muc7EmulationService>();
+            serviceCollection.AddTransient<Muc8EmulationService>();
 
             return serviceCollection;
         }

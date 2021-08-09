@@ -15,7 +15,8 @@ namespace AZMA.TestClient.Emulators.Models
                                          TimeSpan delayBetweenRequests, 
                                          HttpStatusCode expectedResponseStatusCode, 
                                          TimeSpan expectedResponseDelay, 
-                                         TimeSpan? expectedDelayOnApim = null)
+                                         TimeSpan? expectedDelayOnApim = null,
+                                         HttpStatusCode? expectedResponseOnApim = null)
             : base(expectedResponseStatusCode, expectedResponseDelay)
         {
             TotalPeriod = totalPeriod;
@@ -23,6 +24,7 @@ namespace AZMA.TestClient.Emulators.Models
             DelayBetweenRequests = delayBetweenRequests;
 
             ExpectedDelayOnApim = expectedDelayOnApim;
+            ExpectedResponseOnApim = expectedResponseOnApim;
         }
 
         /// <summary>
@@ -39,5 +41,10 @@ namespace AZMA.TestClient.Emulators.Models
         /// Expected delay on API Management instance
         /// </summary>
         public TimeSpan? ExpectedDelayOnApim { get; }
+
+        /// <summary>
+        /// Expected response on 
+        /// </summary>
+        public HttpStatusCode? ExpectedResponseOnApim { get; set; }
     }
 }

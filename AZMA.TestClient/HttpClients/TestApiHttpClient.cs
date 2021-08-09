@@ -10,8 +10,8 @@ namespace TestClient.HttpClients
 {
     public class TestApiHttpClient : HttpClient
     {
-        private HttpClient _client;
-        private ITestApiConfiguration _testApiConfiguration;        
+        private readonly HttpClient _client;
+        private readonly ITestApiConfiguration _testApiConfiguration;        
 
         public TestApiHttpClient(HttpClient client, ITestApiConfiguration testApiConfiguration)
         {
@@ -20,11 +20,17 @@ namespace TestClient.HttpClients
             _testApiConfiguration = testApiConfiguration;
         }
 
-        public async Task<TestApiCallResult> SendAsync(HttpStatusCode expectedResponseStatusCode, TimeSpan expectedResponseDelay, TimeSpan? expectedDelayOnApim = null)
+        public async Task<TestApiCallResult> SendAsync(HttpStatusCode expectedResponseStatusCode, 
+                                                       TimeSpan expectedResponseDelay, 
+                                                       TimeSpan? expectedDelayOnApim = null,
+                                                       HttpStatusCode? expectedResponseOnApim = null)
         {
             string url = $"{_testApiConfiguration.Url}?responseStatusCode={(int)expectedResponseStatusCode}&delay={expectedResponseDelay.Milliseconds}";
             if (expectedDelayOnApim.HasValue)
                 url += $"&delayOnApim={expectedDelayOnApim.Value.Milliseconds}";
+
+            if (expectedResponseOnApim.HasValue && expectedResponseOnApim.Value == HttpStatusCode.BadGateway)
+                url += $"&response502OnApim=true";
             
             var httpResponseMessage = await _client.GetAsync(url);
             

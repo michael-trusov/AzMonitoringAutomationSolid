@@ -37,7 +37,8 @@ namespace AZMA.TestClient.Emulators.MetricAlerts
             {               
                 var testApiCallResult = await _testApiHttpClient.SendAsync(emulationModel.ExpectedResponseStatusCode, 
                                                                            emulationModel.ExpectedResponseDelay, 
-                                                                           emulationModel.ExpectedDelayOnApim);
+                                                                           emulationModel.ExpectedDelayOnApim,
+                                                                           emulationModel.ExpectedResponseOnApim);
                 if (testApiCallResult.HasError)
                     emulationResult.Errors.Add(testApiCallResult);
 

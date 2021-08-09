@@ -18,21 +18,24 @@ namespace AZMA.TestClient.Controllers
         private readonly Muc4EmulationService _muc4EmulationService;
         private readonly Muc5EmulationService _muc5EmulationService;
         private readonly Muc6EmulationService _muc6EmulationService;
-        private readonly Muc7EmulationService _muc7EmulationService;        
+        private readonly Muc7EmulationService _muc7EmulationService;
+        private readonly Muc8EmulationService _muc8EmulationService;
 
         public ApimAlertsController(Muc1EmulationService muc1EmulationService,                                    
                                     Muc3EmulationService muc3EmulationService,
                                     Muc4EmulationService muc4EmulationService,
                                     Muc5EmulationService muc5EmulationService,
                                     Muc6EmulationService muc6EmulationService,
-                                    Muc7EmulationService muc7EmulationService)
+                                    Muc7EmulationService muc7EmulationService,
+                                    Muc8EmulationService muc8EmulationService)
         {
             _muc1EmulationService = muc1EmulationService;            
             _muc3EmulationService = muc3EmulationService;
             _muc4EmulationService = muc4EmulationService;
             _muc5EmulationService = muc5EmulationService;
             _muc6EmulationService = muc6EmulationService; 
-            _muc7EmulationService = muc7EmulationService;            
+            _muc7EmulationService = muc7EmulationService;
+            _muc8EmulationService = muc8EmulationService;
         }
 
         [HttpGet("run-all-tests")]
@@ -174,15 +177,19 @@ namespace AZMA.TestClient.Controllers
         }
 
         [HttpGet("alert-muc8A1")]
-        public Task AlertMuc8A1()
+        public IActionResult AlertMuc8A1()
         {
-            throw new NotImplementedException();
+            Task.Run(async () => await _muc8EmulationService.EmulateScenarioA1());
+
+            return new OkResult();
         }
 
         [HttpGet("alert-muc8A2")]
-        public Task AlertMuc8A2()
+        public IActionResult AlertMuc8A2()
         {
-            throw new NotImplementedException();
+            Task.Run(async () => await _muc8EmulationService.EmulateScenarioA2());
+
+            return new OkResult();
         }
 
         [HttpGet("alert-muc9A1")]

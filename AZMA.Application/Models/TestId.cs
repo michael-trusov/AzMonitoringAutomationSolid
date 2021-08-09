@@ -21,6 +21,8 @@
         TestId_Muc6A1 = 600,
         TestId_Muc6A2,
         TestId_Muc7A1 = 700,
-        TestId_Muc7A2
+        TestId_Muc7A2,
+        TestId_Muc8A1 = 800,
+        TestId_Muc8A2
     }
 }

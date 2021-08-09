@@ -29,6 +29,8 @@ namespace AZMA.Application.Services
             _testScenarios.Add(new TestCaseDescriptionMuc6A2());
             _testScenarios.Add(new TestCaseDescriptionMuc7A1());
             _testScenarios.Add(new TestCaseDescriptionMuc7A2());
+            _testScenarios.Add(new TestCaseDescriptionMuc8A1());
+            _testScenarios.Add(new TestCaseDescriptionMuc8A2());
         }
 
         public TestCaseDescription FindByTestName(string name)
